@@ -3,16 +3,22 @@ import React, { useState, useEffect } from 'react';
 
 export const UserList = () => {
     //listOfUSer
-    const [listOfUSer, setlistOfUSer] = useState([]); // where to store the returned data
+    /*state = {
+        persons: {}
+    }*/  
+    
+    const [listOfUSer, setListOfUSer] = useState([])
     const [error, setError] = useState(null); // where to store the coming errors
     useEffect(() => {
         
         function fetchData() {
-            axios.get('https://jsonplaceholder.typicode.com/users',{ headers: { 
-                'Access-Control-Allow-Origin' : '*',
-                }})
-            .then(res => res.json()) 
-            .then(res => setlistOfUSer(res.hits))
+            axios
+            .get(`https://jsonplaceholder.typicode.com/users`)
+            .then(res => {
+              const users = res.data;
+              setListOfUSer( users );
+            }) 
+           
             .catch(function (error) {
                 // handle error
                 console.log("erreur msg : ",error);
@@ -21,12 +27,14 @@ export const UserList = () => {
         }
      
         fetchData();
-      }, []);
+      });
    
 
     return (
         <div>
-              {listOfUSer.map(el=><div> {el}</div>)}
+              {listOfUSer.map(el=>
+              <div> {el.name}</div>
+              )}
         </div>
     )
 }
