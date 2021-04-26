@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import './UserList.css';
 
 export const UserList = () => {
     //listOfUSer
@@ -31,9 +32,14 @@ export const UserList = () => {
    
 
     return (
-        <div>
+        <div className="box">
               {listOfUSer.map(el=>
-              <div> {el.name}</div>
+              <div> Name: {el.name} <br/> Username: {el.username} Email: {el.email} <br/> <hr/>
+              
+              
+              </div>
+              
+
               )}
         </div>
     )
